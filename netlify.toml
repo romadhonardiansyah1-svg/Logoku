@@ -1,8 +1,49 @@
 # Netlify configuration for LogoKu (pure static site + Supabase).
 # No serverless functions: the browser talks to Supabase directly under RLS.
+# The build step only generates assets/js/env.js from the Netlify
+# environment variables (all client-safe: no secrets).
 
 [build]
   publish = "."
+  command = "node scripts/gen-env.cjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Block non-public folders from being served (publish root = repo root)
+[[redirects]]
+  from = "/_legacy/*"
+  to = "/index.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/.kiro/*"
+  to = "/index.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/supabase/*"
+  to = "/index.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/tests/*"
+  to = "/index.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/Website redesign dengan 3D/*"
+  to = "/index.html"
+  status = 404
+  force = true
 
 # SPA-friendly fallback (optional)
 [[redirects]]
