@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# local env / secrets
+.env
+.env.*
+!.env.example
+
+# build output
+dist/
+
+# netlify
+.netlify/
+
+# supabase local
+supabase/.branches/
+supabase/.temp/
+
+# os / editor
+.DS_Store
+Thumbs.db
+
+# local runtime config (anon key is public, but keep per-env out of git)
+assets/js/env.js

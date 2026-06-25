@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0a0816; color: #f4f2fb; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+  @keyframes floaty2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(14px); } }
+  @keyframes spin3d { 0%,100% { transform: rotateY(-15deg) rotateX(7deg); } 50% { transform: rotateY(15deg) rotateX(-3deg); } }
+  @keyframes orbdrift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.12); } }
+  @keyframes orbdrift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-36px,28px) scale(1.08); } }
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+</style>
+</helmet>
+
+<div style="position: relative; min-height: 100vh; width: 100%;">
+
+  <!-- Decorative orb backdrop -->
+  <div style="position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;">
+    <div style="position: absolute; top: -160px; left: -120px; width: 540px; height: 540px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.55), transparent 65%); filter: blur(40px); animation: orbdrift 16s ease-in-out infinite;"></div>
+    <div style="position: absolute; top: 240px; right: -160px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.45), transparent 65%); filter: blur(50px); animation: orbdrift2 19s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -200px; left: 30%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(192,38,211,0.28), transparent 65%); filter: blur(60px); animation: orbdrift 22s ease-in-out infinite;"></div>
+  </div>
+
+  <div style="position: relative; z-index: 1;">
+
+    <!-- NAVBAR -->
+    <header style="position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(10,8,22,0.55); border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+        <a href="Landing.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+          <span style="display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg,#a78bfa,#60a5fa); font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816; font-size: 17px; box-shadow: 0 8px 22px rgba(124,58,237,0.5);">LK</span>
+          <span style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 20px; color: #fff; letter-spacing: -0.01em;">Logo<span style="color: #a78bfa;">Ku</span></span>
+        </a>
+        <nav style="display: flex; align-items: center; gap: 28px;">
+          <a href="#katalog" style="color: #c9c4e0; text-decoration: none; font-size: 14.5px; font-weight: 500;" style-hover="color: #fff;">Katalog</a>
+          <a href="#harga" style="color: #c9c4e0; text-decoration: none; font-size: 14.5px; font-weight: 500;" style-hover="color: #fff;">Paket Harga</a>
+          <a href="#cara-kerja" style="color: #c9c4e0; text-decoration: none; font-size: 14.5px; font-weight: 500;" style-hover="color: #fff;">Cara Kerja</a>
+          <a href="#faq" style="color: #c9c4e0; text-decoration: none; font-size: 14.5px; font-weight: 500;" style-hover="color: #fff;">FAQ</a>
+          <a href="Login.dc.html" style="color: #fff; text-decoration: none; font-size: 14.5px; font-weight: 600; padding: 9px 18px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04);" style-hover="background: rgba(255,255,255,0.1);">Masuk / Daftar</a>
+          <a href="Brief.dc.html" style="color: #0a0816; text-decoration: none; font-size: 14.5px; font-weight: 700; padding: 10px 20px; border-radius: 11px; background: linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow: 0 10px 26px rgba(124,58,237,0.45);" style-hover="filter: brightness(1.08);">Pesan Logo</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section style="max-width: 1200px; margin: 0 auto; padding: 80px 32px 60px; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;">
+      <div>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); font-size: 13px; font-weight: 600; color: #d6d0f0; backdrop-filter: blur(10px);">🚀 Jasa Pembuatan Logo &amp; Branding No. 1</span>
+        <h1 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 58px; line-height: 1.05; letter-spacing: -0.02em; margin: 22px 0 0; color: #fff;">Identitas Brand yang <span style="background: linear-gradient(120deg,#a78bfa,#60a5fa,#c084fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Terlihat Profesional</span></h1>
+        <p style="font-size: 17.5px; line-height: 1.6; color: #b3aed0; margin: 22px 0 0; max-width: 520px;">LogoKu membantu UMKM hingga perusahaan besar menciptakan logo ikonik, elegan, dan berfilosofi kuat. Pilih referensi gaya, pesan instan via WhatsApp tanpa ribet.</p>
+        <div style="display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap;">
+          <a href="#katalog" style="color: #0a0816; text-decoration: none; font-weight: 700; font-size: 15px; padding: 15px 28px; border-radius: 14px; background: linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow: 0 14px 34px rgba(124,58,237,0.5);" style-hover="filter: brightness(1.08); transform: translateY(-2px);">Lihat Katalog Desain</a>
+          <a href="{{ waConsult }}" target="_blank" style="color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 15px 28px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);" style-hover="background: rgba(255,255,255,0.1);">Konsultasi Gratis</a>
+        </div>
+        <div style="display: flex; gap: 36px; margin-top: 44px;">
+          <div><div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 30px; color: #fff;">500+</div><div style="font-size: 13.5px; color: #a9a4c4;">Brand Terbantu</div></div>
+          <div><div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 30px; color: #fff;">1-3</div><div style="font-size: 13.5px; color: #a9a4c4;">Hari Konsep</div></div>
+          <div><div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 30px; color: #fff;">100%</div><div style="font-size: 13.5px; color: #a9a4c4;">Desain Original</div></div>
+        </div>
+      </div>
+
+      <!-- 3D glass showcase -->
+      <div style="display: grid; place-items: center; perspective: 1200px;">
+        <div style="position: relative; transform-style: preserve-3d; animation: spin3d 9s ease-in-out infinite;">
+          <div style="width: 320px; height: 320px; border-radius: 32px; background: linear-gradient(150deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px); box-shadow: 0 40px 90px rgba(76,29,149,0.55), inset 0 1px 0 rgba(255,255,255,0.3); display: grid; place-items: center; transform: translateZ(40px);">
+            <div style="width: 150px; height: 150px; border-radius: 38px; background: linear-gradient(135deg,#a78bfa,#60a5fa); display: grid; place-items: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 60px; color: #0a0816; box-shadow: 0 20px 50px rgba(124,58,237,0.6), inset 0 2px 0 rgba(255,255,255,0.4);">LK</div>
+          </div>
+          <div style="position: absolute; top: -34px; right: -30px; padding: 12px 18px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); backdrop-filter: blur(14px); font-size: 13px; font-weight: 700; color: #fff; transform: translateZ(90px); animation: floaty 5s ease-in-out infinite; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">✓ Top Agency</div>
+          <div style="position: absolute; bottom: -28px; left: -34px; padding: 12px 18px; border-radius: 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); backdrop-filter: blur(14px); font-size: 13px; font-weight: 700; color: #fff; transform: translateZ(110px); animation: floaty2 6s ease-in-out infinite; box-shadow: 0 16px 40px rgba(0,0,0,0.35);">100% Original</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section style="max-width: 1200px; margin: 0 auto; padding: 40px 32px;">
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="3">
+          <div style="padding: 30px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); box-shadow: 0 18px 50px rgba(0,0,0,0.25);" style-hover="transform: translateY(-4px); border-color: rgba(167,139,250,0.4);">
+            <div style="width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 26px; background: linear-gradient(135deg, rgba(167,139,250,0.25), rgba(96,165,250,0.18)); border: 1px solid rgba(255,255,255,0.14);">{{ b.icon }}</div>
+            <h3 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 19px; color: #fff; margin: 18px 0 8px;">{{ b.title }}</h3>
+            <p style="font-size: 14.5px; line-height: 1.6; color: #aaa4c8; margin: 0;">{{ b.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section id="katalog" style="max-width: 1200px; margin: 0 auto; padding: 70px 32px;">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 40px;">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: #fff; margin: 0;">Galeri Desain Logo Kami</h2>
+        <p style="font-size: 16px; color: #aaa4c8; margin: 14px 0 0;">Klik "Gunakan Gaya Ini" pada logo yang paling mendekati selera bisnis Anda.</p>
+      </div>
+
+      <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+          <button onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+        <sc-for list="{{ catalog }}" as="c" hint-placeholder-count="6">
+          <div style="border-radius: 22px; overflow: hidden; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); box-shadow: 0 18px 50px rgba(0,0,0,0.28);" style-hover="transform: translateY(-5px); border-color: rgba(167,139,250,0.45);">
+            <div style="height: 200px; display: grid; place-items: center; background: {{ c.bg }}; position: relative;">
+              <div style="width: 104px; height: 104px; border-radius: {{ c.radius }}; background: {{ c.markBg }}; display: grid; place-items: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 42px; color: {{ c.markText }}; box-shadow: 0 18px 40px rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,255,255,0.35); transform: rotate({{ c.rot }});">{{ c.letter }}</div>
+            </div>
+            <div style="padding: 22px;">
+              <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #c4bdf0; padding: 5px 11px; border-radius: 8px; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.25);">{{ c.category }}</span>
+              <h3 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 19px; color: #fff; margin: 14px 0 7px;">{{ c.name }}</h3>
+              <p style="font-size: 13.5px; line-height: 1.55; color: #a9a3c8; margin: 0 0 18px;">{{ c.desc }}</p>
+              <a href="{{ c.briefLink }}" style="display: inline-block; text-decoration: none; font-size: 14px; font-weight: 700; color: #cdb8ff; padding: 10px 18px; border-radius: 11px; border: 1px solid rgba(167,139,250,0.35); background: rgba(167,139,250,0.08);" style-hover="background: rgba(167,139,250,0.18); color: #fff;">Gunakan Gaya Ini →</a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section id="cara-kerja" style="max-width: 1200px; margin: 0 auto; padding: 70px 32px;">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: #fff; margin: 0;">3 Langkah Mudah Pesan Logo</h2>
+        <p style="font-size: 16px; color: #aaa4c8; margin: 14px 0 0;">Proses instan tanpa ribet isi form berlembar-lembar.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div style="position: relative; padding: 34px 28px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); overflow: hidden;">
+            <div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 64px; line-height: 1; background: linear-gradient(135deg, rgba(167,139,250,0.9), rgba(96,165,250,0.4)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">{{ s.num }}</div>
+            <h4 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 20px; color: #fff; margin: 16px 0 8px;">{{ s.title }}</h4>
+            <p style="font-size: 14.5px; line-height: 1.6; color: #aaa4c8; margin: 0;">{{ s.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="harga" style="max-width: 1200px; margin: 0 auto; padding: 70px 32px;">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: #fff; margin: 0;">Paket Harga Jasa Desain Logo</h2>
+        <p style="font-size: 16px; color: #aaa4c8; margin: 14px 0 0;">Pilih paket investasi terbaik untuk branding bisnis Anda.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; align-items: start;">
+        <sc-for list="{{ packages }}" as="p" hint-placeholder-count="4">
+          <div style="{{ p.cardStyle }}">
+            <sc-if value="{{ p.badge }}" hint-placeholder-val="">
+              <div style="position: absolute; top: 16px; right: 16px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; color: #0a0816; padding: 5px 11px; border-radius: 999px; background: linear-gradient(135deg,#fbbf24,#f59e0b);">{{ p.badge }}</div>
+            </sc-if>
+            <h3 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 19px; color: #fff; margin: 0;">{{ p.name }}</h3>
+            <p style="font-size: 13px; color: #a9a3c8; margin: 5px 0 0;">{{ p.subtitle }}</p>
+            <div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 32px; color: #fff; margin: 18px 0 4px;">Rp {{ p.price }}<span style="font-size: 15px; color: #a9a3c8; font-weight: 500;">.000</span></div>
+            <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 18px 0;"></div>
+            <ul style="list-style: none; padding: 0; margin: 0 0 22px; display: flex; flex-direction: column; gap: 9px;">
+              <sc-for list="{{ p.features }}" as="ft" hint-placeholder-count="6">
+                <li style="display: flex; align-items: center; gap: 9px; font-size: 13px; color: {{ ft.color }};">
+                  <span style="flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; background: {{ ft.iconBg }}; color: {{ ft.iconColor }};">{{ ft.icon }}</span>{{ ft.label }}
+                </li>
+              </sc-for>
+            </ul>
+            <a href="{{ p.briefLink }}" style="{{ p.btnStyle }}">Pilih Paket</a>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section style="max-width: 1200px; margin: 0 auto; padding: 70px 32px;">
+      <div style="text-align: center; max-width: 640px; margin: 0 auto 44px;">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: #fff; margin: 0;">Apa Kata Klien Kami?</h2>
+        <p style="font-size: 16px; color: #aaa4c8; margin: 14px 0 0;">Kami bangga telah membantu ratusan brand tumbuh dan terlihat profesional.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px;">
+        <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+          <div style="padding: 30px; border-radius: 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px);">
+            <div style="font-size: 16px; color: #fbbf24; letter-spacing: 2px;">★★★★★</div>
+            <p style="font-size: 15px; line-height: 1.65; color: #d4cff0; margin: 16px 0 22px;">{{ t.quote }}</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 42px; height: 42px; border-radius: 12px; background: {{ t.avatarBg }}; display: grid; place-items: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816;">{{ t.initial }}</div>
+              <div><div style="font-size: 14.5px; font-weight: 700; color: #fff;">{{ t.name }}</div><div style="font-size: 12.5px; color: #a9a3c8;">{{ t.role }}</div></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="max-width: 820px; margin: 0 auto; padding: 70px 32px;">
+      <div style="text-align: center; margin: 0 auto 40px;">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; color: #fff; margin: 0;">Pertanyaan yang Sering Diajukan</h2>
+        <p style="font-size: 16px; color: #aaa4c8; margin: 14px 0 0;">Tidak menemukan jawaban? Hubungi kami untuk konsultasi gratis.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="3">
+          <div style="border-radius: 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(14px); overflow: hidden;">
+            <button onClick="{{ q.toggle }}" style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 24px; background: transparent; border: none; cursor: pointer; text-align: left; font-family: 'Plus Jakarta Sans',sans-serif; font-size: 16px; font-weight: 600; color: #fff;">
+              <span>{{ q.question }}</span>
+              <span style="flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: rgba(167,139,250,0.18); color: #cdb8ff; font-size: 18px; transform: {{ q.iconRotate }}; transition: transform 0.25s;">+</span>
+            </button>
+            <div style="{{ q.answerStyle }}">
+              <p style="margin: 0; padding: 0 24px 22px; font-size: 14.5px; line-height: 1.65; color: #aaa4c8;">{{ q.answer }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section style="max-width: 1200px; margin: 40px auto 0; padding: 0 32px;">
+      <div style="position: relative; overflow: hidden; border-radius: 30px; padding: 60px 48px; text-align: center; background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(37,99,235,0.3)); border: 1px solid rgba(255,255,255,0.16); backdrop-filter: blur(20px); box-shadow: 0 30px 80px rgba(76,29,149,0.4);">
+        <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 38px; color: #fff; margin: 0; letter-spacing: -0.02em;">Siap Bikin Logo Brand Anda?</h2>
+        <p style="font-size: 16.5px; color: #d8d3f0; margin: 14px 0 30px;">Mulai proyek Anda hari ini. Konsep pertama bisa jadi dalam 1-3 hari.</p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="Brief.dc.html" style="color: #0a0816; text-decoration: none; font-weight: 700; font-size: 15px; padding: 15px 30px; border-radius: 14px; background: #fff; box-shadow: 0 14px 34px rgba(0,0,0,0.25);" style-hover="transform: translateY(-2px);">Mulai Brief Sekarang</a>
+          <a href="{{ waConsult }}" target="_blank" style="color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 15px 30px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08);" style-hover="background: rgba(255,255,255,0.16);">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="max-width: 1200px; margin: 70px auto 0; padding: 40px 32px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(135deg,#a78bfa,#60a5fa); font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816; font-size: 14px;">LK</span>
+        <span style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 17px; color: #fff;">Logo<span style="color: #a78bfa;">Ku</span></span>
+      </div>
+      <p style="font-size: 13.5px; color: #8c87a8; margin: 0;">© 2026 LogoKu. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
+    <div style="height: 40px;"></div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <sc-if value="{{ showFloat }}" hint-placeholder-val="{{ true }}">
+    <a href="{{ waConsult }}" target="_blank" style="position: fixed; bottom: 28px; right: 28px; z-index: 60; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 14.5px; color: #fff; background: linear-gradient(135deg,#22c55e,#16a34a); box-shadow: 0 14px 40px rgba(22,163,74,0.5);" style-hover="transform: translateY(-3px);">💬 Konsultasi</a>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}, &quot;whatsappNumber&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;6285236314038&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;showWhatsappFloat&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}, &quot;highlightPackage&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;Logo 1 Pilihan&quot;, &quot;Logo 2 Pilihan&quot;, &quot;Logo 3 Pilihan&quot;, &quot;Paket Utama&quot;], &quot;default&quot;: &quot;Logo 3 Pilihan&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { filter: 'all', openFaq: 0 };
+
+  renderVals() {
+    const wa = this.props.whatsappNumber ?? '6285236314038';
+    const waConsult = 'https://api.whatsapp.com/send?phone=' + wa + '&text=' + encodeURIComponent('Halo Admin LogoKu, saya ingin berkonsultasi mengenai desain logo.');
+    const highlight = this.props.highlightPackage ?? 'Logo 3 Pilihan';
+
+    const benefits = [
+      { icon: '🎨', title: 'Desain 100% Eksklusif', desc: 'Bukan template pasaran. Logo Anda diriset khusus sesuai karakter bisnis Anda.' },
+      { icon: '⚡', title: 'Proses Super Cepat', desc: 'Dapatkan draf konsep sketsa pertama dalam waktu 1-3 hari kerja.' },
+      { icon: '💬', title: 'Pantau Lewat Sistem & WA', desc: 'Revisi interaktif langsung tanpa ribet membuat akun manual.' },
+    ];
+
+    const filterDefs = [
+      { label: 'Semua Kategori', slug: 'all' },
+      { label: 'Kuliner & Kafe', slug: 'kuliner-kafe' },
+      { label: 'Corporate & Bisnis', slug: 'corporate-bisnis' },
+      { label: 'Minimalis & Modern', slug: 'minimalis-modern' },
+    ];
+    const active = this.state.filter;
+    const filters = filterDefs.map((f) => {
+      const on = f.slug === active;
+      return {
+        label: f.label,
+        select: () => this.setState({ filter: f.slug }),
+        style: 'cursor:pointer; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:13.5px; font-weight:600; padding:10px 18px; border-radius:11px; transition:all .2s; ' +
+          (on
+            ? 'color:#0a0816; background:linear-gradient(135deg,#a78bfa,#60a5fa); border:1px solid transparent; box-shadow:0 10px 26px rgba(124,58,237,0.4);'
+            : 'color:#c9c4e0; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);'),
+      };
+    });
+
+    const allCatalog = [
+      { name: 'Kopi Kenangan Senja', category: 'Kuliner & Kafe', slug: 'kuliner-kafe', desc: 'Tipografi hangat dengan monogram retro estetik untuk kedai kopi kekinian.', letter: 'KS', markBg: 'linear-gradient(135deg,#f59e0b,#b45309)', markText: '#fff7ed', bg: 'linear-gradient(135deg,#3a2a1a,#1a130b)', radius: '50%', rot: '-4deg', ref: 1 },
+      { name: 'Roti Bahagia', category: 'Kuliner & Kafe', slug: 'kuliner-kafe', desc: 'Bentuk membulat lembut yang ramah, ideal untuk bakery dan toko roti.', letter: 'RB', markBg: 'linear-gradient(135deg,#fb7185,#e11d48)', markText: '#fff', bg: 'linear-gradient(135deg,#3a1a24,#1a0b10)', radius: '30px', rot: '3deg', ref: 2 },
+      { name: 'Teh Tarik Tariko', category: 'Kuliner & Kafe', slug: 'kuliner-kafe', desc: 'Aksen daun segar dengan kesan tradisional yang dimodernkan.', letter: 'T', markBg: 'linear-gradient(135deg,#34d399,#059669)', markText: '#04241a', bg: 'linear-gradient(135deg,#10322a,#081914)', radius: '50% 50% 50% 12px', rot: '-2deg', ref: 3 },
+      { name: 'Apex Holding Corp', category: 'Corporate & Bisnis', slug: 'corporate-bisnis', desc: 'Geometris kokoh melambangkan pertumbuhan bisnis yang stabil dan tepercaya.', letter: 'A', markBg: 'linear-gradient(135deg,#60a5fa,#2563eb)', markText: '#04132e', bg: 'linear-gradient(135deg,#13213f,#0a1020)', radius: '20px', rot: '0deg', ref: 4 },
+      { name: 'Nusantara Tech', category: 'Corporate & Bisnis', slug: 'corporate-bisnis', desc: 'Heksagon presisi yang mewakili teknologi dan jaringan terhubung.', letter: 'N', markBg: 'linear-gradient(135deg,#22d3ee,#0891b2)', markText: '#042b33', bg: 'linear-gradient(135deg,#0e2c33,#07161a)', radius: '24px', rot: '4deg', ref: 5 },
+      { name: 'Vertex Finance', category: 'Corporate & Bisnis', slug: 'corporate-bisnis', desc: 'Bentuk wajik tegas yang menyiratkan keamanan dan presisi finansial.', letter: 'V', markBg: 'linear-gradient(135deg,#818cf8,#4338ca)', markText: '#0a0a2e', bg: 'linear-gradient(135deg,#1c1c45,#0c0c22)', radius: '18px', rot: '45deg', ref: 6 },
+      { name: 'Purely Organics', category: 'Minimalis & Modern', slug: 'minimalis-modern', desc: 'Garis organik feminin mewah, ideal untuk kosmetik dan kecantikan.', letter: 'P', markBg: 'linear-gradient(135deg,#a3e635,#16a34a)', markText: '#0a2410', bg: 'linear-gradient(135deg,#16301a,#0a190d)', radius: '50%', rot: '-3deg', ref: 7 },
+      { name: 'Aurora Studio', category: 'Minimalis & Modern', slug: 'minimalis-modern', desc: 'Gradien lembut serba modern untuk studio kreatif dan agensi.', letter: 'A', markBg: 'linear-gradient(135deg,#c084fc,#7c3aed)', markText: '#fff', bg: 'linear-gradient(135deg,#241338,#120a1d)', radius: '50%', rot: '2deg', ref: 8 },
+      { name: 'Mono Architects', category: 'Minimalis & Modern', slug: 'minimalis-modern', desc: 'Monokrom tegas dan rapi untuk firma arsitektur dan desain interior.', letter: 'M', markBg: 'linear-gradient(135deg,#e5e7eb,#9ca3af)', markText: '#1f2937', bg: 'linear-gradient(135deg,#222433,#101119)', radius: '14px', rot: '0deg', ref: 9 },
+    ];
+    const catalog = allCatalog
+      .filter((c) => active === 'all' || c.slug === active)
+      .map((c) => ({ ...c, briefLink: 'Brief.dc.html?ref=' + c.ref }));
+
+    const steps = [
+      { num: '01', title: 'Pilih Referensi', desc: 'Cari inspirasi gaya logo kesukaanmu di galeri katalog LogoKu di atas.' },
+      { num: '02', title: 'Isi Brief Kreatif', desc: 'Verifikasi nomor WhatsApp, lalu isi nama brand dan preferensi warna lewat asisten kami.' },
+      { num: '03', title: 'Terima & Evaluasi', desc: 'Pantau progres pembuatan desain langsung dari website, revisi hingga final.' },
+    ];
+
+    const mkF = (label, ok) => ({
+      label,
+      icon: ok ? '✓' : '✕',
+      color: ok ? '#d4cff0' : '#6b6685',
+      iconBg: ok ? 'rgba(94,224,176,0.16)' : 'rgba(255,255,255,0.05)',
+      iconColor: ok ? '#5ee0b0' : '#6b6685',
+    });
+    const pkgDefs = [
+      { name: 'Logo 1 Pilihan', subtitle: 'Konsep dari Pemesan', price: '80', paket: 1, feats: [['Logo 1 Desain',1],['Revisi 3x',1],['1-3 Hari',1],['File Master CDR/AI/EPS',1],['Panduan Warna',1],['Pedoman Merek',0],['Logo Arti',1],['Kartu Nama',0],['Amplop & Kop Surat',0],['Bonus 4 Identitas',0],['Ekspor JPG/PNG/PDF',1]] },
+      { name: 'Logo 2 Pilihan', subtitle: '2 Desain Alternatif', price: '140', paket: 2, feats: [['Logo 2 Pilihan',1],['Revisi 3x',1],['1-2 Hari',1],['File Master CDR/AI/EPS',1],['Panduan Warna',1],['Pedoman Merek',0],['Logo Arti',1],['Kartu Nama',1],['Amplop & Kop Surat',0],['Bonus 4 Identitas',0],['Ekspor JPG/PNG/PDF',1]] },
+      { name: 'Logo 3 Pilihan', subtitle: '3 Alternatif Desain', price: '199', paket: 3, feats: [['Logo 3 Pilihan',1],['Revisi 3x',1],['1-2 Hari',1],['File Master CDR/AI/EPS',1],['Panduan Warna',1],['Pedoman Merek',0],['Logo Arti',1],['Kartu Nama',1],['Amplop & Kop',1],['Bonus 4 Identitas',0],['Ekspor JPG/PNG/PDF',1]] },
+      { name: 'Paket Utama', subtitle: 'Paket Lengkap', price: '250', paket: 4, feats: [['Logo 4 Pilihan',1],['Revisi 3x',1],['1-7 Hari',1],['File Master CDR/AI/EPS',1],['Panduan Warna',1],['Pedoman Merek',1],['Logo Arti',1],['Kartu Nama',1],['Amplop & Kop',1],['Bonus 4 Identitas',1],['Ekspor JPG/PNG/PDF',1]] },
+    ];
+    const packages = pkgDefs.map((p) => {
+      const feat = p.name === highlight;
+      return {
+        name: p.name,
+        subtitle: p.subtitle,
+        price: p.price,
+        badge: feat ? (p.paket === 4 ? 'TERLENGKAP' : 'TERLARIS') : '',
+        briefLink: 'Brief.dc.html?paket=' + p.paket,
+        features: p.feats.map((f) => mkF(f[0], f[1])),
+        cardStyle: 'position:relative; padding:30px 24px; border-radius:22px; backdrop-filter:blur(16px); transition:transform .2s; ' +
+          (feat
+            ? 'background:linear-gradient(160deg, rgba(124,58,237,0.3), rgba(37,99,235,0.16)); border:1px solid rgba(167,139,250,0.5); box-shadow:0 26px 70px rgba(76,29,149,0.5); transform:translateY(-8px);'
+            : 'background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); box-shadow:0 18px 50px rgba(0,0,0,0.25);'),
+        btnStyle: 'display:block; text-align:center; text-decoration:none; font-weight:700; font-size:14.5px; padding:13px; border-radius:13px; transition:all .2s; ' +
+          (feat
+            ? 'color:#0a0816; background:linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow:0 12px 30px rgba(124,58,237,0.45);'
+            : 'color:#fff; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16);'),
+      };
+    });
+
+    const testimonials = [
+      { quote: 'Desainnya melebihi ekspektasi! Tim LogoKu sangat responsif dan cepat mengerti brief yang saya berikan. Sangat direkomendasikan.', name: 'Budi Santoso', role: 'CEO Kopi Senja', initial: 'B', avatarBg: 'linear-gradient(135deg,#f59e0b,#b45309)' },
+      { quote: 'Prosesnya mudah dan hasilnya luar biasa. Logo baru kami terlihat jauh lebih modern dan profesional. Terima kasih LogoKu!', name: 'Rina Wijaya', role: 'Owner Purely Organics', initial: 'R', avatarBg: 'linear-gradient(135deg,#34d399,#059669)' },
+      { quote: 'Sistem tracking project-nya sangat membantu. Saya bisa memantau progres desain kapan saja. Pelayanan sangat memuaskan.', name: 'Alex T.', role: 'Apex Holding', initial: 'A', avatarBg: 'linear-gradient(135deg,#60a5fa,#2563eb)' },
+    ];
+
+    const faqDefs = [
+      { question: 'Berapa lama proses pengerjaan logo?', answer: 'Proses desain konsep awal biasanya memakan waktu 1-3 hari kerja setelah brief kami terima. Durasi total proyek bergantung pada jumlah revisi dan kecepatan feedback dari Anda.' },
+      { question: 'Apa saja yang akan saya dapatkan di paket akhir?', answer: 'Anda menerima file master logo dalam berbagai format (AI, EPS, PDF) untuk cetak, serta format web (PNG, JPG, SVG) dengan latar transparan dan solid, plus panduan singkat penggunaan logo.' },
+      { question: 'Bagaimana jika saya tidak suka dengan desainnya?', answer: 'Setiap paket menyertakan jumlah revisi tertentu. Kami bekerja sama dengan Anda menyempurnakan desain hingga sesuai visi Anda. Kepuasan Anda adalah prioritas utama kami.' },
+    ];
+    const faqs = faqDefs.map((q, i) => {
+      const open = this.state.openFaq === i;
+      return {
+        question: q.question,
+        answer: q.answer,
+        toggle: () => this.setState({ openFaq: open ? -1 : i }),
+        iconRotate: open ? 'rotate(45deg)' : 'rotate(0deg)',
+        answerStyle: 'overflow:hidden; transition:max-height .3s ease; max-height:' + (open ? '200px' : '0px') + ';',
+      };
+    });
+
+    return {
+      waConsult,
+      showFloat: this.props.showWhatsappFloat ?? true,
+      benefits, filters, catalog, steps, packages, testimonials, faqs,
+    };
+  }
+}
+</script>
+</body>
+</html>

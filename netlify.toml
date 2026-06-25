@@ -1,0 +1,15 @@
+# Netlify configuration for LogoKu (pure static site + Supabase).
+# No serverless functions: the browser talks to Supabase directly under RLS.
+
+[build]
+  publish = "."
+
+# SPA-friendly fallback (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
+
+[dev]
+  framework = "#static"
+  publish = "."

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0a0816; color: #f4f2fb; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  @keyframes orbdrift { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-30px) scale(1.12); } }
+  @keyframes pop { from { transform: scale(0.94) translateY(8px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+  ::placeholder { color: #7d77a0; }
+  input, select, textarea { font-family: 'Plus Jakarta Sans', sans-serif; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: rgba(167,139,250,0.6) !important; }
+  select option { background: #181231; color: #fff; }
+</style>
+</helmet>
+
+<div style="position: relative; min-height: 100vh; width: 100%; display: flex;">
+  <div style="position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none;">
+    <div style="position: absolute; top: -160px; left: 10%; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.4), transparent 65%); filter: blur(50px); animation: orbdrift 18s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -180px; right: -120px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.32), transparent 65%); filter: blur(55px);"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside style="position: relative; z-index: 2; width: 256px; flex-shrink: 0; padding: 26px 20px; background: rgba(10,8,22,0.6); backdrop-filter: blur(18px); border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; min-height: 100vh;">
+    <a href="Landing.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 0 8px 4px;">
+      <span style="display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg,#a78bfa,#60a5fa); font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816; font-size: 16px;">LK</span>
+      <span style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 18px; color: #fff;">Logo<span style="color: #a78bfa;">Ku</span></span>
+    </a>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6f6a90; padding: 24px 12px 10px;">Menu</div>
+    <nav style="display: flex; flex-direction: column; gap: 4px;">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+        <button onClick="{{ n.select }}" style="{{ n.style }}"><span style="font-size: 16px;">{{ n.icon }}</span>{{ n.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="margin-top: auto; padding: 14px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 11px;">
+      <div style="width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg,#a78bfa,#60a5fa); display: grid; place-items: center; font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816;">A</div>
+      <div style="flex: 1; min-width: 0;"><div style="font-size: 13.5px; font-weight: 700; color: #fff;">{{ settings.nama }}</div><div style="font-size: 11.5px; color: #8c87a8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ settings.email }}</div></div>
+    </div>
+    <a href="Login.dc.html" style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border-radius: 12px; text-decoration: none; font-size: 13.5px; font-weight: 600; color: #ff9b9b; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);" style-hover="background: rgba(239,68,68,0.16);">↩ Keluar</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main style="position: relative; z-index: 1; flex: 1; padding: 32px 40px; min-width: 0;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 28px; flex-wrap: wrap;">
+      <div>
+        <h1 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: #fff; margin: 0;">{{ viewTitle }}</h1>
+        <p style="font-size: 14.5px; color: #aaa4c8; margin: 7px 0 0;">{{ viewSubtitle }}</p>
+      </div>
+      <sc-if value="{{ showAddBtn }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ openAdd }}" style="display: inline-flex; align-items: center; gap: 9px; padding: 12px 20px; border-radius: 13px; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 700; font-size: 14px; color: #0a0816; background: linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow: 0 12px 30px rgba(124,58,237,0.4);" style-hover="filter: brightness(1.08);">＋ Pesanan Manual</button>
+      </sc-if>
+    </div>
+
+    <!-- STATS (Ringkasan + Pesanan) -->
+    <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-bottom: 28px;">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="padding: 22px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px);">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 13px; color: #aaa4c8; font-weight: 600;">{{ s.label }}</span>
+              <span style="display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; font-size: 17px; background: {{ s.iconBg }};">{{ s.icon }}</span>
+            </div>
+            <div style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 28px; color: #fff; margin-top: 14px;">{{ s.value }}</div>
+            <div style="font-size: 12.5px; color: {{ s.deltaColor }}; margin-top: 4px; font-weight: 600;">{{ s.delta }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- RINGKASAN: breakdown + recent -->
+    <sc-if value="{{ isRingkasan }}" hint-placeholder-val="">
+      <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 18px;">
+        <div style="padding: 26px; border-radius: 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px);">
+          <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 18px; color: #fff; margin: 0 0 20px;">Sebaran Status Progres</h2>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <sc-for list="{{ breakdown }}" as="b" hint-placeholder-count="5">
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px;"><span style="font-size: 13.5px; color: #d4cff0; font-weight: 600;">{{ b.label }}</span><span style="font-size: 13px; color: #aaa4c8;">{{ b.count }}</span></div>
+                <div style="height: 9px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden;"><div style="height: 100%; width: {{ b.width }}; border-radius: 999px; background: {{ b.color }};"></div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="padding: 26px; border-radius: 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px);">
+          <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 18px; color: #fff; margin: 0 0 16px;">Pesanan Terbaru</h2>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ recent }}" as="o" hint-placeholder-count="4">
+              <button onClick="{{ o.openEdit }}" style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px; cursor: pointer; text-align: left; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); width: 100%;" style-hover="background: rgba(255,255,255,0.07);">
+                <span style="display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: {{ o.avatarBg }}; font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816; font-size: 14px;">{{ o.initial }}</span>
+                <div style="flex: 1; min-width: 0;"><div style="font-size: 13.5px; font-weight: 700; color: #fff;">{{ o.brand }}</div><div style="font-size: 12px; color: #8c87a8;">{{ o.customer }}</div></div>
+                <span style="padding: 5px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; color: {{ o.progColor }}; background: {{ o.progBg }}; border: 1px solid {{ o.progBorder }};">{{ o.progres }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- PESANAN: table -->
+    <sc-if value="{{ isPesanan }}" hint-placeholder-val="{{ true }}">
+      <div style="border-radius: 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap;">
+          <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 600; font-size: 18px; color: #fff; margin: 0;">Daftar Pesanan Masuk</h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+              <button onClick="{{ f.select }}" style="{{ f.style }}">{{ f.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 880px;">
+            <thead>
+              <tr style="text-align: left;">
+                <th style="padding: 14px 24px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Klien</th>
+                <th style="padding: 14px 16px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Brand</th>
+                <th style="padding: 14px 16px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Progres</th>
+                <th style="padding: 14px 16px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Pembayaran</th>
+                <th style="padding: 14px 16px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Total</th>
+                <th style="padding: 14px 24px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #8c87a8;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ orders }}" as="o" hint-placeholder-count="5">
+                <tr style="border-top: 1px solid rgba(255,255,255,0.06);" style-hover="background: rgba(255,255,255,0.03);">
+                  <td style="padding: 16px 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <span style="display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0; background: {{ o.avatarBg }}; font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: #0a0816; font-size: 15px;">{{ o.initial }}</span>
+                      <div><div style="font-size: 14px; font-weight: 700; color: #fff;">{{ o.customer }}</div><div style="font-size: 12px; color: #8c87a8;">{{ o.wa }}</div></div>
+                    </div>
+                  </td>
+                  <td style="padding: 16px;"><div style="font-size: 14px; font-weight: 600; color: #e6e2f6;">{{ o.brand }}</div><div style="font-size: 12px; color: #8c87a8; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ o.brief }}</div></td>
+                  <td style="padding: 16px;"><span style="display: inline-block; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: {{ o.progColor }}; background: {{ o.progBg }}; border: 1px solid {{ o.progBorder }};">{{ o.progres }}</span></td>
+                  <td style="padding: 16px;"><span style="display: inline-block; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; color: {{ o.payColor }}; background: {{ o.payBg }}; border: 1px solid {{ o.payBorder }};">{{ o.bayar }}</span></td>
+                  <td style="padding: 16px;"><div style="font-size: 14px; font-weight: 700; color: #fff;">{{ o.total }}</div><div style="font-size: 11.5px; color: #8c87a8;">{{ o.dpNote }}</div></td>
+                  <td style="padding: 16px 24px;">
+                    <div style="display: flex; gap: 7px;">
+                      <button onClick="{{ o.openEdit }}" title="Edit pesanan" style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; border: 1px solid rgba(167,139,250,0.3); background: rgba(167,139,250,0.1); color: #cdb8ff; font-size: 14px;" style-hover="background: rgba(167,139,250,0.2);">✎</button>
+                      <a href="{{ o.waChat }}" target="_blank" title="Chat WhatsApp" style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(34,197,94,0.3); background: rgba(34,197,94,0.1); color: #6ee7a8; font-size: 14px;" style-hover="background: rgba(34,197,94,0.2);">💬</a>
+                      <button onClick="{{ o.remove }}" title="Hapus pesanan" style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; border: 1px solid rgba(239,68,68,0.3); background: rgba(239,68,68,0.1); color: #fca5a5; font-size: 14px;" style-hover="background: rgba(239,68,68,0.2);">🗑</button>
+                    </div>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="">
+            <div style="padding: 50px; text-align: center; color: #8c87a8; font-size: 14px;">Belum ada pesanan pada filter ini.</div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- KATALOG -->
+    <sc-if value="{{ isKatalog }}" hint-placeholder-val="">
+      <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;">
+        <sc-for list="{{ catalogItems }}" as="c" hint-placeholder-count="6">
+          <div style="padding: 20px; border-radius: 20px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); opacity: {{ c.opacity }};">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span style="display: grid; place-items: center; width: 58px; height: 58px; border-radius: {{ c.radius }}; flex-shrink: 0; background: {{ c.markBg }}; font-family: 'Space Grotesk',sans-serif; font-weight: 700; color: {{ c.markText }}; font-size: 24px; box-shadow: 0 10px 24px rgba(0,0,0,0.3);">{{ c.letter }}</span>
+              <div style="min-width: 0;"><div style="font-size: 15px; font-weight: 700; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ c.name }}</div><div style="font-size: 12px; color: #aaa4c8;">{{ c.category }}</div></div>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 16px;">
+              <button onClick="{{ c.toggle }}" style="flex: 1; padding: 9px; border-radius: 10px; cursor: pointer; font-size: 12.5px; font-weight: 700; font-family: 'Plus Jakarta Sans',sans-serif; color: #fff; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);" style-hover="background: rgba(255,255,255,0.12);">{{ c.toggleLabel }}</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- PENGATURAN -->
+    <sc-if value="{{ isPengaturan }}" hint-placeholder-val="">
+      <div style="max-width: 560px; padding: 30px; border-radius: 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px);">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #d4cff0; margin-bottom: 8px;">Nama Lengkap</label>
+            <input type="text" value="{{ settings.nama }}" onChange="{{ sh.nama }}" style="width: 100%; padding: 13px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14.5px;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #d4cff0; margin-bottom: 8px;">Email</label>
+            <input type="email" value="{{ settings.email }}" onChange="{{ sh.email }}" style="width: 100%; padding: 13px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14.5px;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 13.5px; font-weight: 600; color: #d4cff0; margin-bottom: 8px;">Nomor WhatsApp Bisnis</label>
+            <input type="tel" value="{{ settings.wa }}" onChange="{{ sh.wa }}" style="width: 100%; padding: 13px 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14.5px;">
+          </div>
+          <button onClick="{{ saveSettings }}" style="align-self: flex-start; padding: 13px 26px; border-radius: 13px; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 700; font-size: 14.5px; color: #0a0816; background: linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow: 0 12px 30px rgba(124,58,237,0.4);" style-hover="filter: brightness(1.08);">Simpan Perubahan</button>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <!-- TOAST -->
+  <sc-if value="{{ savedToast }}" hint-placeholder-val="">
+    <div style="position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 80; padding: 14px 26px; border-radius: 14px; background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.4); color: #6ee7a8; font-weight: 700; font-size: 14px; backdrop-filter: blur(14px); animation: pop 0.25s ease;">✓ Perubahan berhasil disimpan</div>
+  </sc-if>
+
+  <!-- MODAL -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="">
+    <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 90; background: rgba(5,4,12,0.7); backdrop-filter: blur(6px); display: grid; place-items: center; padding: 24px;">
+      <div onClick="{{ stop }}" style="width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; padding: 30px; border-radius: 24px; background: rgba(24,18,49,0.95); border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 40px 90px rgba(0,0,0,0.6); animation: pop 0.25s ease;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px;">
+          <h2 style="font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 21px; color: #fff; margin: 0;">{{ modalTitle }}</h2>
+          <button onClick="{{ closeModal }}" style="display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); color: #aaa4c8; font-size: 16px;" style-hover="background: rgba(255,255,255,0.12);">✕</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Nama Klien</label>
+              <input type="text" value="{{ draft.customer }}" onChange="{{ dh.customer }}" placeholder="Nama klien" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">No. WhatsApp</label>
+              <input type="tel" value="{{ draft.wa }}" onChange="{{ dh.wa }}" placeholder="0812xxxx" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px;">
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Nama Brand</label>
+            <input type="text" value="{{ draft.brand }}" onChange="{{ dh.brand }}" placeholder="Nama brand / bisnis" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px;">
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Brief Singkat</label>
+            <input type="text" value="{{ draft.brief }}" onChange="{{ dh.brief }}" placeholder="Catatan brief" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Total (Rp)</label>
+              <input type="number" value="{{ draft.total }}" onChange="{{ dh.total }}" placeholder="199000" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Progres</label>
+              <select value="{{ draft.progres }}" onChange="{{ dh.progres }}" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; cursor: pointer;">
+                <option>Antrean</option>
+                <option>Proses Sketsa</option>
+                <option>Digitalisasi</option>
+                <option>Revisi</option>
+                <option>Selesai</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #d4cff0; margin-bottom: 7px;">Bayar</label>
+              <select value="{{ draft.bayar }}" onChange="{{ dh.bayar }}" style="width: 100%; padding: 12px 14px; border-radius: 11px; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); color: #fff; font-size: 14px; cursor: pointer;">
+                <option>Belum Lunas</option>
+                <option>DP</option>
+                <option>Lunas</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button onClick="{{ saveDraft }}" style="flex: 1; padding: 14px; border-radius: 13px; border: none; cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 700; font-size: 14.5px; color: #0a0816; background: linear-gradient(135deg,#a78bfa,#60a5fa); box-shadow: 0 12px 30px rgba(124,58,237,0.4);" style-hover="filter: brightness(1.08);">{{ saveLabel }}</button>
+            <button onClick="{{ closeModal }}" style="padding: 14px 22px; border-radius: 13px; cursor: pointer; font-family: 'Plus Jakarta Sans',sans-serif; font-weight: 600; font-size: 14.5px; color: #fff; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.16);" style-hover="background: rgba(255,255,255,0.12);">Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1280, &quot;height&quot;: 860}}">
+class Component extends DCLogic {
+  state = {
+    nav: 'Pesanan',
+    filter: 'Semua',
+    modal: null,
+    editIndex: null,
+    draft: { customer: '', wa: '', brand: '', brief: '', total: '', progres: 'Antrean', bayar: 'Belum Lunas' },
+    catalogHidden: {},
+    settings: { nama: 'Admin Utama', email: 'admin@logoku.id', wa: '6285236314038' },
+    savedToast: false,
+    orders: [
+      { customer: 'Alifaa', wa: '0852-3631-4038', brand: 'Roti Bahagia', brief: 'Roti riso lmayo', progres: 'Selesai', bayar: 'Lunas', total: 350000, dp: 350000 },
+      { customer: 'Fitriaaaa', wa: '0812-3456-789', brand: 'Kopi Senja', brief: 'Ada senja-senjanya', progres: 'Proses Sketsa', bayar: 'DP', total: 350000, dp: 90000 },
+      { customer: 'Fitriiiiii', wa: '0852-3631-4038', brand: 'Kopi Senja', brief: 'Konsep kedai kopi modern', progres: 'Proses Sketsa', bayar: 'Belum Lunas', total: 350000, dp: 0 },
+      { customer: 'Budi Santoso', wa: '0813-2200-1188', brand: 'Apex Holding', brief: 'Korporat, geometris, tepercaya', progres: 'Digitalisasi', bayar: 'Lunas', total: 250000, dp: 250000 },
+      { customer: 'Rina Wijaya', wa: '0857-9911-2030', brand: 'Purely Organics', brief: 'Skincare organik feminin', progres: 'Revisi', bayar: 'DP', total: 199000, dp: 100000 },
+      { customer: 'Andre K.', wa: '0821-4567-8890', brand: 'Nusantara Tech', brief: 'Startup teknologi lokal', progres: 'Antrean', bayar: 'Belum Lunas', total: 140000, dp: 0 },
+    ],
+  };
+
+  rupiah(n) { return 'Rp ' + (n || 0).toLocaleString('id-ID'); }
+  progStyle(p) {
+    const m = { 'Antrean': ['#cbd5e1','rgba(148,163,184,0.14)','rgba(148,163,184,0.3)'], 'Proses Sketsa': ['#c4b5fd','rgba(167,139,250,0.16)','rgba(167,139,250,0.34)'], 'Digitalisasi': ['#93c5fd','rgba(96,165,250,0.16)','rgba(96,165,250,0.34)'], 'Revisi': ['#fcd34d','rgba(251,191,36,0.16)','rgba(251,191,36,0.34)'], 'Selesai': ['#6ee7a8','rgba(34,197,94,0.16)','rgba(34,197,94,0.34)'] };
+    return m[p] || m['Antrean'];
+  }
+  payStyle(p) {
+    const m = { 'Belum Lunas': ['#fca5a5','rgba(239,68,68,0.14)','rgba(239,68,68,0.3)'], 'DP': ['#fcd34d','rgba(251,191,36,0.14)','rgba(251,191,36,0.3)'], 'Lunas': ['#6ee7a8','rgba(34,197,94,0.14)','rgba(34,197,94,0.3)'] };
+    return m[p] || m['Belum Lunas'];
+  }
+  waNum(wa) { const d = String(wa).replace(/[^0-9]/g, ''); return d.startsWith('0') ? '62' + d.slice(1) : d; }
+  avatar(i) { const a = ['linear-gradient(135deg,#f59e0b,#b45309)','linear-gradient(135deg,#34d399,#059669)','linear-gradient(135deg,#60a5fa,#2563eb)','linear-gradient(135deg,#c084fc,#7c3aed)','linear-gradient(135deg,#fb7185,#e11d48)']; return a[i % a.length]; }
+
+  setDraft(field, val) { this.setState((s) => ({ draft: { ...s.draft, [field]: val } })); }
+  setSetting(field, val) { this.setState((s) => ({ settings: { ...s.settings, [field]: val } })); }
+
+  openAdd() { this.setState({ modal: 'add', editIndex: null, draft: { customer: '', wa: '', brand: '', brief: '', total: '', progres: 'Antrean', bayar: 'Belum Lunas' } }); }
+  openEdit(i) { const o = this.state.orders[i]; this.setState({ modal: 'edit', editIndex: i, draft: { customer: o.customer, wa: o.wa, brand: o.brand, brief: o.brief, total: String(o.total), progres: o.progres, bayar: o.bayar } }); }
+  closeModal() { this.setState({ modal: null, editIndex: null }); }
+  removeOrder(i) { this.setState((s) => ({ orders: s.orders.filter((_, idx) => idx !== i) })); }
+
+  saveDraft() {
+    const d = this.state.draft;
+    const total = parseInt(d.total, 10) || 0;
+    const dp = d.bayar === 'Lunas' ? total : (d.bayar === 'DP' ? Math.round(total / 2) : 0);
+    const rec = { customer: d.customer || 'Tanpa Nama', wa: d.wa || '-', brand: d.brand || '-', brief: d.brief || '', progres: d.progres, bayar: d.bayar, total, dp };
+    this.setState((s) => {
+      const orders = s.orders.slice();
+      if (s.modal === 'edit' && s.editIndex != null) orders[s.editIndex] = rec;
+      else orders.unshift(rec);
+      return { orders, modal: null, editIndex: null };
+    });
+  }
+
+  saveSettings() {
+    this.setState({ savedToast: true });
+    setTimeout(() => this.setState({ savedToast: false }), 2200);
+  }
+
+  renderVals() {
+    const nav = this.state.nav;
+    const navDefs = [ { label: 'Ringkasan', icon: '▦' }, { label: 'Pesanan', icon: '🗂' }, { label: 'Katalog', icon: '🎨' }, { label: 'Pengaturan', icon: '⚙' } ];
+    const navItems = navDefs.map((n) => {
+      const on = n.label === nav;
+      return { label: n.label, icon: n.icon, select: () => this.setState({ nav: n.label }),
+        style: 'display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:12px; border:none; cursor:pointer; width:100%; text-align:left; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:14px; font-weight:600; transition:all .2s; ' +
+          (on ? 'color:#fff; background:linear-gradient(135deg, rgba(167,139,250,0.25), rgba(96,165,250,0.15)); box-shadow:inset 0 0 0 1px rgba(167,139,250,0.3);' : 'color:#aaa4c8; background:transparent;') };
+    });
+
+    const titles = {
+      'Ringkasan': ['Ringkasan', 'Gambaran umum performa & pesanan terbaru.'],
+      'Pesanan': ['Dashboard Pesanan', 'Kelola dan pantau seluruh progres desain logo klien.'],
+      'Katalog': ['Kelola Katalog', 'Atur logo contoh yang tampil di galeri website.'],
+      'Pengaturan': ['Pengaturan', 'Perbarui profil dan preferensi akun Anda.'],
+    };
+
+    const all = this.state.orders;
+    const counts = { 'Antrean': 0, 'Proses Sketsa': 0, 'Digitalisasi': 0, 'Revisi': 0, 'Selesai': 0 };
+    all.forEach((o) => { if (counts[o.progres] != null) counts[o.progres]++; });
+    const proses = counts['Proses Sketsa'] + counts['Digitalisasi'] + counts['Revisi'];
+    const pendapatan = all.reduce((sum, o) => sum + (o.dp || 0), 0);
+    const stats = [
+      { label: 'Total Pesanan', value: String(all.length), icon: '🗂', iconBg: 'rgba(167,139,250,0.18)', delta: 'Seluruh pesanan', deltaColor: '#aaa4c8' },
+      { label: 'Sedang Proses', value: String(proses), icon: '✏️', iconBg: 'rgba(96,165,250,0.18)', delta: counts['Revisi'] + ' menunggu revisi', deltaColor: '#aaa4c8' },
+      { label: 'Selesai', value: String(counts['Selesai']), icon: '✅', iconBg: 'rgba(34,197,94,0.16)', delta: 'Sudah dikirim', deltaColor: '#6ee7a8' },
+      { label: 'Pendapatan', value: this.rupiah(pendapatan), icon: '💰', iconBg: 'rgba(251,191,36,0.16)', delta: 'Total diterima', deltaColor: '#6ee7a8' },
+    ];
+
+    const total = all.length || 1;
+    const breakdown = Object.keys(counts).map((k) => { const st = this.progStyle(k); return { label: k, count: counts[k], width: Math.round((counts[k] / total) * 100) + '%', color: st[0] }; });
+
+    const mapOrder = (o, ri) => {
+      const ps = this.progStyle(o.progres); const ys = this.payStyle(o.bayar);
+      return { customer: o.customer, wa: o.wa, brand: o.brand, brief: o.brief, progres: o.progres, bayar: o.bayar,
+        initial: (o.customer || '?').charAt(0).toUpperCase(), avatarBg: this.avatar(ri), total: this.rupiah(o.total),
+        dpNote: o.dp >= o.total ? 'Lunas penuh' : (o.dp > 0 ? 'DP ' + this.rupiah(o.dp) : 'Belum bayar'),
+        progColor: ps[0], progBg: ps[1], progBorder: ps[2], payColor: ys[0], payBg: ys[1], payBorder: ys[2],
+        waChat: 'https://api.whatsapp.com/send?phone=' + this.waNum(o.wa),
+        openEdit: () => this.openEdit(ri), remove: () => this.removeOrder(ri) };
+    };
+
+    const filterDefs = ['Semua', 'Antrean', 'Proses Sketsa', 'Revisi', 'Selesai'];
+    const filters = filterDefs.map((f) => { const on = f === this.state.filter; return { label: f, select: () => this.setState({ filter: f }),
+      style: 'cursor:pointer; font-family:\'Plus Jakarta Sans\',sans-serif; font-size:12.5px; font-weight:700; padding:8px 14px; border-radius:10px; border:none; transition:all .2s; ' +
+        (on ? 'color:#0a0816; background:linear-gradient(135deg,#a78bfa,#60a5fa);' : 'color:#c9c4e0; background:rgba(255,255,255,0.05); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12);') }; });
+
+    const orders = all.map(mapOrder).filter((o) => this.state.filter === 'Semua' || o.progres === this.state.filter);
+    const recent = all.slice(0, 4).map(mapOrder);
+
+    const catDefs = [
+      { name: 'Kopi Kenangan Senja', category: 'Kuliner & Kafe', letter: 'KS', markBg: 'linear-gradient(135deg,#f59e0b,#b45309)', markText: '#fff7ed', radius: '50%' },
+      { name: 'Roti Bahagia', category: 'Kuliner & Kafe', letter: 'RB', markBg: 'linear-gradient(135deg,#fb7185,#e11d48)', markText: '#fff', radius: '18px' },
+      { name: 'Teh Tarik Tariko', category: 'Kuliner & Kafe', letter: 'T', markBg: 'linear-gradient(135deg,#34d399,#059669)', markText: '#04241a', radius: '50% 50% 50% 8px' },
+      { name: 'Apex Holding Corp', category: 'Corporate & Bisnis', letter: 'A', markBg: 'linear-gradient(135deg,#60a5fa,#2563eb)', markText: '#04132e', radius: '14px' },
+      { name: 'Nusantara Tech', category: 'Corporate & Bisnis', letter: 'N', markBg: 'linear-gradient(135deg,#22d3ee,#0891b2)', markText: '#042b33', radius: '16px' },
+      { name: 'Vertex Finance', category: 'Corporate & Bisnis', letter: 'V', markBg: 'linear-gradient(135deg,#818cf8,#4338ca)', markText: '#0a0a2e', radius: '12px' },
+      { name: 'Purely Organics', category: 'Minimalis & Modern', letter: 'P', markBg: 'linear-gradient(135deg,#a3e635,#16a34a)', markText: '#0a2410', radius: '50%' },
+      { name: 'Aurora Studio', category: 'Minimalis & Modern', letter: 'A', markBg: 'linear-gradient(135deg,#c084fc,#7c3aed)', markText: '#fff', radius: '50%' },
+      { name: 'Mono Architects', category: 'Minimalis & Modern', letter: 'M', markBg: 'linear-gradient(135deg,#e5e7eb,#9ca3af)', markText: '#1f2937', radius: '10px' },
+    ];
+    const catalogItems = catDefs.map((c, i) => { const hidden = !!this.state.catalogHidden[i]; return { ...c, opacity: hidden ? '0.45' : '1', toggleLabel: hidden ? 'Tampilkan' : 'Sembunyikan', toggle: () => this.setState((s) => ({ catalogHidden: { ...s.catalogHidden, [i]: !s.catalogHidden[i] } })) }; });
+
+    const t = titles[nav] || titles['Pesanan'];
+    return {
+      navItems, viewTitle: t[0], viewSubtitle: t[1],
+      isRingkasan: nav === 'Ringkasan', isPesanan: nav === 'Pesanan', isKatalog: nav === 'Katalog', isPengaturan: nav === 'Pengaturan',
+      showStats: nav === 'Ringkasan' || nav === 'Pesanan', showAddBtn: nav === 'Ringkasan' || nav === 'Pesanan',
+      stats, breakdown, recent, orders, filters, catalogItems,
+      isEmpty: orders.length === 0,
+      settings: this.state.settings,
+      sh: { nama: (e) => this.setSetting('nama', e.target.value), email: (e) => this.setSetting('email', e.target.value), wa: (e) => this.setSetting('wa', e.target.value) },
+      saveSettings: () => this.saveSettings(),
+      savedToast: this.state.savedToast,
+      modalOpen: this.state.modal != null,
+      modalTitle: this.state.modal === 'edit' ? 'Edit Pesanan' : 'Tambah Pesanan Manual',
+      saveLabel: this.state.modal === 'edit' ? 'Simpan Perubahan' : 'Tambah Pesanan',
+      draft: this.state.draft,
+      dh: { customer: (e) => this.setDraft('customer', e.target.value), wa: (e) => this.setDraft('wa', e.target.value), brand: (e) => this.setDraft('brand', e.target.value), brief: (e) => this.setDraft('brief', e.target.value), total: (e) => this.setDraft('total', e.target.value), progres: (e) => this.setDraft('progres', e.target.value), bayar: (e) => this.setDraft('bayar', e.target.value) },
+      openAdd: () => this.openAdd(), closeModal: () => this.closeModal(), saveDraft: () => this.saveDraft(),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>

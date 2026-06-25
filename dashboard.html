@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Admin — LogoKu</title>
+  <meta name="description" content="Panel admin LogoKu untuk mengelola pesanan, progres desain, pelanggan, dan pembayaran.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script src="assets/js/env.js"></script>
+  <script type="module" src="assets/js/dashboard.js"></script>
+</head>
+<body>
+  <!-- decorative background orbs -->
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="dash-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <a class="sidebar-brand" href="index.html" aria-label="LogoKu beranda">
+        <span class="mark">LK</span>
+        <span class="name">Logo<span>Ku</span></span>
+      </a>
+
+      <p class="sidebar-label" id="nav-label">Menu</p>
+      <nav class="sidebar-nav" aria-labelledby="nav-label">
+        <button type="button" class="nav-item active" data-view="ringkasan" aria-current="page">
+          <span class="nav-ic" aria-hidden="true">▦</span><span>Ringkasan</span>
+        </button>
+        <button type="button" class="nav-item" data-view="pesanan">
+          <span class="nav-ic" aria-hidden="true">🗂</span><span>Pesanan</span>
+        </button>
+        <button type="button" class="nav-item" data-view="pelanggan">
+          <span class="nav-ic" aria-hidden="true">👥</span><span>Pelanggan</span>
+        </button>
+        <button type="button" class="nav-item" data-view="pengaturan">
+          <span class="nav-ic" aria-hidden="true">⚙</span><span>Pengaturan</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-profile">
+        <span class="avatar" id="profile-initial" aria-hidden="true">A</span>
+        <div class="meta">
+          <div class="pname" id="profile-name">—</div>
+          <div class="pemail" id="profile-email">—</div>
+        </div>
+      </div>
+      <button type="button" class="sidebar-logout" id="logout-btn">↩ Keluar</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash-main">
+      <div class="dash-topbar">
+        <div>
+          <h1 class="dash-title" id="view-title">Ringkasan</h1>
+          <p class="dash-subtitle" id="view-subtitle">Pantau performa pesanan secara sekilas.</p>
+        </div>
+        <button type="button" class="dash-add-btn" id="add-order-btn">
+          <span aria-hidden="true">＋</span> Pesanan Manual
+        </button>
+      </div>
+
+      <!-- Supabase-not-configured / error notice -->
+      <div class="dash-notice" id="dash-notice" role="alert" hidden></div>
+
+      <!-- RINGKASAN VIEW -->
+      <section class="dash-view" id="view-ringkasan" aria-label="Ringkasan">
+        <div class="stat-grid" id="stat-grid"></div>
+        <div class="dash-cols">
+          <div class="dash-panel">
+            <h2 class="dash-panel-title">Sebaran Status Progres</h2>
+            <div class="breakdown-list" id="breakdown-list"></div>
+          </div>
+          <div class="dash-panel">
+            <h2 class="dash-panel-title">Pesanan Terbaru</h2>
+            <div class="recent-list" id="recent-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PESANAN VIEW -->
+      <section class="dash-view" id="view-pesanan" aria-label="Pesanan" hidden>
+        <div class="data-table-wrap">
+          <div class="data-table-head">
+            <h2 class="dash-panel-title" style="margin:0;">Daftar Pesanan Masuk</h2>
+            <div class="filters" id="filter-chips" role="group" aria-label="Filter status pesanan"></div>
+          </div>
+          <div class="data-table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Klien</th>
+                  <th scope="col">Brand</th>
+                  <th scope="col">Progres</th>
+                  <th scope="col">Pembayaran</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+            <div class="empty-state" id="orders-empty" hidden>Belum ada pesanan pada filter ini.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PELANGGAN VIEW -->
+      <section class="dash-view" id="view-pelanggan" aria-label="Pelanggan" hidden>
+        <div class="customer-grid" id="customer-grid"></div>
+        <div class="empty-state" id="customer-empty" hidden>Belum ada pelanggan.</div>
+      </section>
+
+      <!-- PENGATURAN VIEW -->
+      <section class="dash-view" id="view-pengaturan" aria-label="Pengaturan" hidden>
+        <form class="settings-card" id="settings-form" novalidate>
+          <div class="field">
+            <label for="set-nama">Nama Lengkap</label>
+            <input class="input" type="text" id="set-nama" name="nama" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="set-email">Email</label>
+            <input class="input" type="email" id="set-email" name="email" autocomplete="email" readonly>
+            <span class="hint">Email akun tidak dapat diubah dari sini.</span>
+          </div>
+          <div class="field">
+            <label for="set-wa">Nomor WhatsApp Bisnis</label>
+            <input class="input" type="tel" id="set-wa" name="wa" autocomplete="tel" inputmode="tel">
+            <span class="hint">Disimpan pada profil admin.</span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" id="settings-save">Simpan Perubahan</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- MANUAL ORDER MODAL (create + edit) -->
+  <div class="modal" id="order-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-card" role="document">
+      <div class="modal-head">
+        <h2 class="modal-title" id="modal-title">Pesanan Manual</h2>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Tutup dialog">✕</button>
+      </div>
+      <form class="modal-body" id="order-form" novalidate>
+        <div class="modal-grid-2">
+          <div class="field">
+            <label for="f-customer">Nama Klien</label>
+            <input class="input" type="text" id="f-customer" name="customer" placeholder="Nama klien" required>
+          </div>
+          <div class="field">
+            <label for="f-wa">No. WhatsApp</label>
+            <input class="input" type="tel" id="f-wa" name="wa" placeholder="0812xxxx" inputmode="tel" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-brand">Nama Brand</label>
+          <input class="input" type="text" id="f-brand" name="brand" placeholder="Nama brand / bisnis" required>
+        </div>
+        <div class="field">
+          <label for="f-brief">Brief Singkat</label>
+          <input class="input" type="text" id="f-brief" name="brief" placeholder="Catatan brief">
+        </div>
+        <div class="modal-grid-3">
+          <div class="field">
+            <label for="f-total">Total (Rp)</label>
+            <input class="input" type="number" id="f-total" name="total" placeholder="199000" min="0" step="1000">
+          </div>
+          <div class="field">
+            <label for="f-dp">DP (Rp)</label>
+            <input class="input" type="number" id="f-dp" name="dp" placeholder="0" min="0" step="1000">
+          </div>
+          <div class="field">
+            <label for="f-progres">Progres</label>
+            <select class="select" id="f-progres" name="progres"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-bayar">Bayar</label>
+          <select class="select" id="f-bayar" name="bayar"></select>
+        </div>
+        <p class="modal-error" id="modal-error" role="alert" aria-live="assertive"></p>
+        <div class="modal-actions">
+          <button type="submit" class="btn-save" id="modal-save">Simpan</button>
+          <button type="button" class="btn-cancel" id="modal-cancel">Batal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

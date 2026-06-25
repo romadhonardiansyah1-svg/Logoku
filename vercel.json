@@ -1,0 +1,17 @@
+{
+  "buildCommand": "node scripts/gen-env.cjs",
+  "outputDirectory": ".",
+  "installCommand": "echo no-deps-needed",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

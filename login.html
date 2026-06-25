@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Masuk — Panel Internal LogoKu</title>
+  <meta name="description" content="Panel internal LogoKu untuk mengelola pesanan, progres desain, dan pembayaran klien.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script src="assets/js/env.js"></script>
+  <script type="module" src="assets/js/auth.js"></script>
+</head>
+<body>
+  <!-- decorative background orbs -->
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="auth-shell layer">
+    <!-- Left brand / intro panel -->
+    <section class="auth-intro" aria-labelledby="auth-intro-title">
+      <a class="brand" href="index.html">
+        <span class="mark">LK</span>
+        <span class="name">Logo<span>Ku</span></span>
+      </a>
+
+      <div class="auth-art" aria-hidden="true">
+        <div class="auth-art-card">
+          <div class="auth-art-mark">LK</div>
+        </div>
+      </div>
+
+      <div class="auth-intro-copy">
+        <h2 id="auth-intro-title">Panel internal LogoKu</h2>
+        <p>Masuk untuk mengelola pesanan, memperbarui status progres desain, dan memantau pembayaran klien.</p>
+      </div>
+    </section>
+
+    <!-- Right auth panel -->
+    <section class="auth-panel" aria-label="Formulir autentikasi">
+      <div class="auth-card glass">
+        <!-- Tabs -->
+        <div class="auth-tabs" role="tablist" aria-label="Pilih mode">
+          <button type="button" id="tab-login" class="auth-tab is-active" role="tab"
+                  aria-selected="true" aria-controls="auth-form">Masuk</button>
+          <button type="button" id="tab-register" class="auth-tab" role="tab"
+                  aria-selected="false" aria-controls="auth-form">Daftar</button>
+        </div>
+
+        <h1 id="auth-heading" class="auth-heading">Selamat datang kembali</h1>
+        <p id="auth-subheading" class="auth-subheading">Masuk ke panel pengelolaan LogoKu.</p>
+
+        <form id="auth-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+          <!-- Full name (register only) -->
+          <div class="field" id="field-fullname" hidden>
+            <label for="auth-fullname">Nama Lengkap</label>
+            <input class="input" type="text" id="auth-fullname" name="fullname"
+                   placeholder="Nama Anda" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="auth-email">Email</label>
+            <input class="input" type="email" id="auth-email" name="email"
+                   placeholder="nama@email.com" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="auth-password">Kata Sandi</label>
+            <input class="input" type="password" id="auth-password" name="password"
+                   placeholder="••••••••" autocomplete="current-password" required>
+            <span class="hint" id="password-hint" hidden>Minimal 8 karakter.</span>
+          </div>
+
+          <!-- Login-only row -->
+          <div class="auth-row" id="field-login-extras">
+            <label class="auth-remember" for="auth-remember">
+              <input type="checkbox" id="auth-remember" name="remember" checked>
+              Ingat saya
+            </label>
+            <button type="button" class="auth-link" id="forgot-password">Lupa sandi?</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg auth-submit" id="auth-submit">Masuk</button>
+        </form>
+
+        <p class="auth-switch">
+          <span id="auth-switch-prompt">Belum punya akun?</span>
+          <button type="button" class="auth-link" id="auth-switch-action">Daftar di sini</button>
+        </p>
+
+        <!-- aria-live status / error region -->
+        <div class="auth-status" id="auth-status" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

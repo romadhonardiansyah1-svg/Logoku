@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LogoKu — Jasa Desain Logo & Branding Profesional</title>
+  <meta name="description" content="LogoKu membantu UMKM hingga perusahaan besar membuat logo ikonik, elegan, dan berfilosofi kuat. Pilih referensi, pesan instan via WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script src="assets/js/env.js"></script>
+</head>
+<body>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="layer">
+    <!-- NAVBAR -->
+    <header class="site-header">
+      <div class="container header-wrap">
+        <a class="brand" href="index.html">
+          <span class="mark">LK</span>
+          <span class="name">Logo<span>Ku</span></span>
+        </a>
+        <button class="menu-toggle" id="mobileMenuBtn" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navMenu">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="navMenu" aria-label="Navigasi utama">
+          <a href="#katalog">Katalog</a>
+          <a href="#harga">Paket Harga</a>
+          <a href="#cara-kerja">Cara Kerja</a>
+          <a href="#faq">FAQ</a>
+          <a href="login.html" class="btn-ghost">Masuk / Daftar</a>
+          <a href="brief.html" class="btn btn-primary">Pesan Logo</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="container hero">
+      <div>
+        <span class="badge">🚀 Jasa Pembuatan Logo &amp; Branding No. 1</span>
+        <h1>Identitas Brand yang <span class="text-grad">Terlihat Profesional</span></h1>
+        <p>LogoKu membantu UMKM hingga perusahaan besar menciptakan logo ikonik, elegan, dan
+           berfilosofi kuat. Pilih referensi gaya, pesan instan via WhatsApp tanpa ribet.</p>
+        <div class="hero-cta">
+          <a href="#katalog" class="btn btn-primary btn-lg">Lihat Katalog Desain</a>
+          <a href="#" class="btn btn-ghost btn-lg" data-wa-consult target="_blank" rel="noopener">Konsultasi Gratis</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="num">500+</div><div class="lbl">Brand Terbantu</div></div>
+          <div><div class="num">1-3</div><div class="lbl">Hari Konsep</div></div>
+          <div><div class="num">100%</div><div class="lbl">Desain Original</div></div>
+        </div>
+      </div>
+      <div class="showcase" aria-hidden="true">
+        <div class="showcase-inner">
+          <div class="glass" style="width:300px;height:300px;display:grid;place-items:center;border-radius:32px;">
+            <div class="t-avatar" style="width:140px;height:140px;border-radius:36px;font-size:56px;">LK</div>
+          </div>
+          <div class="badge" style="position:absolute;top:-28px;right:-24px;animation:floaty 5s ease-in-out infinite;">✓ Top Agency</div>
+          <div class="badge" style="position:absolute;bottom:-24px;left:-28px;animation:floaty2 6s ease-in-out infinite;">100% Original</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="container section">
+      <div class="grid-3">
+        <div class="glass benefit">
+          <div class="icon-box" aria-hidden="true">🎨</div>
+          <h3>Desain 100% Eksklusif</h3>
+          <p>Bukan template pasaran. Logo Anda diriset khusus sesuai karakter bisnis Anda.</p>
+        </div>
+        <div class="glass benefit">
+          <div class="icon-box" aria-hidden="true">⚡</div>
+          <h3>Proses Super Cepat</h3>
+          <p>Dapatkan draf konsep sketsa pertama dalam waktu 1-3 hari kerja.</p>
+        </div>
+        <div class="glass benefit">
+          <div class="icon-box" aria-hidden="true">💬</div>
+          <h3>Pantau Lewat Sistem &amp; WA</h3>
+          <p>Revisi interaktif langsung tanpa ribet membuat akun manual.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section id="katalog" class="container section">
+      <div class="section-head">
+        <h2>Galeri Desain Logo Kami</h2>
+        <p>Klik "Gunakan Gaya Ini" pada logo yang paling mendekati selera bisnis Anda.</p>
+      </div>
+      <div class="filters" id="catalogFilters" role="group" aria-label="Filter kategori katalog"></div>
+      <div class="catalog-grid" id="catalogGrid" aria-live="polite"></div>
+    </section>
+
+    <!-- WORKFLOW -->
+    <section id="cara-kerja" class="container section">
+      <div class="section-head">
+        <h2>3 Langkah Mudah Pesan Logo</h2>
+        <p>Proses instan tanpa ribet isi form berlembar-lembar.</p>
+      </div>
+      <div class="grid-3">
+        <div class="glass step">
+          <div class="num">01</div>
+          <h4>Pilih Referensi</h4>
+          <p>Cari inspirasi gaya logo kesukaanmu di galeri katalog LogoKu di atas.</p>
+        </div>
+        <div class="glass step">
+          <div class="num">02</div>
+          <h4>Isi Brief Kreatif</h4>
+          <p>Isi nama brand dan preferensi warna lewat form brief kami yang singkat.</p>
+        </div>
+        <div class="glass step">
+          <div class="num">03</div>
+          <h4>Terima &amp; Evaluasi</h4>
+          <p>Lanjut chat WhatsApp, pantau progres desain, revisi hingga final.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="harga" class="container section">
+      <div class="section-head">
+        <h2>Paket Harga Jasa Desain Logo</h2>
+        <p>Pilih paket investasi terbaik untuk branding bisnis Anda.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- Paket 1 -->
+        <div class="price-card">
+          <h3>Logo 1 Pilihan</h3>
+          <p class="sub">Konsep dari Pemesan</p>
+          <div class="price">Rp 80<small>.000</small></div>
+          <ul class="feat-list">
+            <li class="ok"><span class="ic">✓</span>Logo 1 Desain</li>
+            <li class="ok"><span class="ic">✓</span>Revisi 3x</li>
+            <li class="ok"><span class="ic">✓</span>1-3 Hari</li>
+            <li class="ok"><span class="ic">✓</span>File Master CDR/AI/EPS</li>
+            <li class="ok"><span class="ic">✓</span>Panduan Warna</li>
+            <li class="no"><span class="ic">✕</span>Pedoman Merek</li>
+            <li class="ok"><span class="ic">✓</span>Logo Arti</li>
+            <li class="no"><span class="ic">✕</span>Kartu Nama</li>
+            <li class="no"><span class="ic">✕</span>Amplop &amp; Kop Surat</li>
+            <li class="no"><span class="ic">✕</span>Bonus 4 Identitas Desain</li>
+            <li class="ok"><span class="ic">✓</span>Ekspor JPG / PNG / PDF</li>
+          </ul>
+          <a href="brief.html?paket=1" class="btn-pick">Pilih Paket</a>
+        </div>
+        <!-- Paket 2 -->
+        <div class="price-card">
+          <h3>Logo 2 Pilihan</h3>
+          <p class="sub">2 Desain Alternatif</p>
+          <div class="price">Rp 140<small>.000</small></div>
+          <ul class="feat-list">
+            <li class="ok"><span class="ic">✓</span>Logo 2 Pilihan</li>
+            <li class="ok"><span class="ic">✓</span>Revisi 3x</li>
+            <li class="ok"><span class="ic">✓</span>1-2 Hari</li>
+            <li class="ok"><span class="ic">✓</span>File Master CDR/AI/EPS</li>
+            <li class="ok"><span class="ic">✓</span>Panduan Warna</li>
+            <li class="no"><span class="ic">✕</span>Pedoman Merek</li>
+            <li class="ok"><span class="ic">✓</span>Logo Arti</li>
+            <li class="ok"><span class="ic">✓</span>Kartu Nama</li>
+            <li class="no"><span class="ic">✕</span>Amplop &amp; Kop Surat</li>
+            <li class="no"><span class="ic">✕</span>Bonus 4 Identitas Desain</li>
+            <li class="ok"><span class="ic">✓</span>Ekspor JPG / PNG / PDF</li>
+          </ul>
+          <a href="brief.html?paket=2" class="btn-pick">Pilih Paket</a>
+        </div>
+        <!-- Paket 3 -->
+        <div class="price-card featured">
+          <div class="ribbon">TERLARIS</div>
+          <h3>Logo 3 Pilihan</h3>
+          <p class="sub">3 Alternatif Desain</p>
+          <div class="price">Rp 199<small>.000</small></div>
+          <ul class="feat-list">
+            <li class="ok"><span class="ic">✓</span>Logo 3 Pilihan</li>
+            <li class="ok"><span class="ic">✓</span>Revisi 3x</li>
+            <li class="ok"><span class="ic">✓</span>1-2 Hari</li>
+            <li class="ok"><span class="ic">✓</span>File Master CDR/AI/EPS</li>
+            <li class="ok"><span class="ic">✓</span>Panduan Warna</li>
+            <li class="no"><span class="ic">✕</span>Pedoman Merek</li>
+            <li class="ok"><span class="ic">✓</span>Logo Arti</li>
+            <li class="ok"><span class="ic">✓</span>Kartu Nama</li>
+            <li class="ok"><span class="ic">✓</span>Amplop &amp; Kop</li>
+            <li class="no"><span class="ic">✕</span>Bonus 4 Identitas Desain</li>
+            <li class="ok"><span class="ic">✓</span>Ekspor JPG / PNG / PDF</li>
+          </ul>
+          <a href="brief.html?paket=3" class="btn-pick solid">Pilih Paket</a>
+        </div>
+        <!-- Paket 4 -->
+        <div class="price-card featured">
+          <div class="ribbon premium">TERLENGKAP</div>
+          <h3>Paket Utama</h3>
+          <p class="sub">Paket Lengkap</p>
+          <div class="price">Rp 250<small>.000</small></div>
+          <ul class="feat-list">
+            <li class="ok"><span class="ic">✓</span>Logo 4 Pilihan</li>
+            <li class="ok"><span class="ic">✓</span>Revisi 3x</li>
+            <li class="ok"><span class="ic">✓</span>1-7 Hari</li>
+            <li class="ok"><span class="ic">✓</span>File Master CDR/AI/EPS</li>
+            <li class="ok"><span class="ic">✓</span>Panduan Warna</li>
+            <li class="ok"><span class="ic">✓</span>Pedoman Merek</li>
+            <li class="ok"><span class="ic">✓</span>Logo Arti</li>
+            <li class="ok"><span class="ic">✓</span>Kartu Nama</li>
+            <li class="ok"><span class="ic">✓</span>Amplop &amp; Kop</li>
+            <li class="ok"><span class="ic">✓</span>Bonus 4 Identitas Desain</li>
+            <li class="ok"><span class="ic">✓</span>Ekspor JPG / PNG / PDF</li>
+          </ul>
+          <a href="brief.html?paket=4" class="btn-pick solid">Pilih Paket</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="container section">
+      <div class="section-head">
+        <h2>Apa Kata Klien Kami?</h2>
+        <p>Kami bangga telah membantu ratusan brand tumbuh dan terlihat profesional.</p>
+      </div>
+      <div class="grid-3">
+        <div class="glass benefit">
+          <div class="stars" aria-label="5 dari 5 bintang">★★★★★</div>
+          <p class="t-quote">"Desainnya melebihi ekspektasi! Tim LogoKu sangat responsif dan cepat mengerti brief yang saya berikan. Sangat direkomendasikan."</p>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">B</div>
+            <div><div style="font-weight:700;color:#fff;">Budi Santoso</div><div style="font-size:12.5px;color:#a9a3c8;">CEO Kopi Senja</div></div>
+          </div>
+        </div>
+        <div class="glass benefit">
+          <div class="stars" aria-label="5 dari 5 bintang">★★★★★</div>
+          <p class="t-quote">"Prosesnya mudah dan hasilnya luar biasa. Logo baru kami terlihat jauh lebih modern dan profesional. Terima kasih LogoKu!"</p>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">R</div>
+            <div><div style="font-weight:700;color:#fff;">Rina Wijaya</div><div style="font-size:12.5px;color:#a9a3c8;">Owner Purely Organics</div></div>
+          </div>
+        </div>
+        <div class="glass benefit">
+          <div class="stars" aria-label="5 dari 5 bintang">★★★★★</div>
+          <p class="t-quote">"Pelayanannya memuaskan, komunikasi lancar dari awal sampai file final saya terima. Logo barunya bikin brand kami makin percaya diri."</p>
+          <div class="t-author">
+            <div class="t-avatar" aria-hidden="true">A</div>
+            <div><div style="font-weight:700;color:#fff;">Alex T.</div><div style="font-size:12.5px;color:#a9a3c8;">Apex Holding</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="container section faq">
+      <div class="section-head">
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <p>Tidak menemukan jawaban? Hubungi kami untuk konsultasi gratis.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Berapa lama proses pengerjaan logo?</span>
+            <span class="ic" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a"><p>Konsep awal biasanya 1-3 hari kerja setelah brief diterima. Durasi total bergantung pada jumlah revisi dan kecepatan feedback dari Anda.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Apa saja yang saya dapatkan di paket akhir?</span>
+            <span class="ic" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a"><p>File master logo dalam berbagai format (AI, EPS, PDF) untuk cetak, serta format web (PNG, JPG, SVG) dengan latar transparan dan solid, plus panduan singkat penggunaan logo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button" aria-expanded="false">
+            <span>Bagaimana jika saya tidak suka dengan desainnya?</span>
+            <span class="ic" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a"><p>Setiap paket menyertakan jumlah revisi tertentu. Kami menyempurnakan desain hingga sesuai visi Anda. Kepuasan Anda prioritas kami.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="container">
+      <div class="cta-banner">
+        <h2>Siap Bikin Logo Brand Anda?</h2>
+        <p>Mulai proyek Anda hari ini. Konsep pertama bisa jadi dalam 1-3 hari.</p>
+        <div class="hero-cta" style="justify-content:center;">
+          <a href="brief.html" class="btn btn-primary btn-lg">Mulai Brief Sekarang</a>
+          <a href="#" class="btn btn-ghost btn-lg" data-wa-consult target="_blank" rel="noopener">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container site-footer">
+      <a class="brand" href="index.html">
+        <span class="mark">LK</span>
+        <span class="name">Logo<span>Ku</span></span>
+      </a>
+      <p>© 2026 LogoKu. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+  </div>
+
+  <a href="#" class="wa-float" data-wa-consult target="_blank" rel="noopener">💬 Konsultasi</a>
+
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/catalog.js"></script>
+</body>
+</html>

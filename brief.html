@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Isi Brief Kreatif — LogoKu</title>
+  <meta name="description" content="Isi brief kreatif logo Anda dan langsung lanjut ke WhatsApp untuk memulai proyek desain bersama LogoKu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script src="assets/js/env.js"></script>
+</head>
+<body>
+  <!-- decorative background orbs -->
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="layer">
+    <!-- top bar -->
+    <header class="site-header">
+      <div class="container header-wrap">
+        <a class="brand" href="index.html">
+          <span class="mark">LK</span>
+          <span class="name">Logo<span>Ku</span></span>
+        </a>
+        <nav class="nav">
+          <a href="index.html">← Kembali ke Beranda</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container brief-wrap">
+      <!-- page header -->
+      <div class="section-head">
+        <span class="badge">⚡ Mulai Proyek Logo Anda</span>
+        <h1>Isi Brief Kreatif</h1>
+        <p>Isi data singkat di bawah, lalu Anda akan langsung diarahkan ke chat WhatsApp admin
+           dengan ringkasan pesanan yang sudah terisi otomatis.</p>
+      </div>
+
+      <!-- selected package panel -->
+      <div id="paketPanel" class="paket-panel" hidden>
+        <span class="paket-icon" aria-hidden="true">📦</span>
+        <div>
+          <div class="paket-eyebrow" id="paketEyebrow">Paket Dipilih</div>
+          <div class="paket-name" id="paketName"></div>
+        </div>
+      </div>
+
+      <form id="briefForm" class="brief-form" novalidate>
+        <!-- STEP 1 — contact info -->
+        <section class="glass step-card" aria-labelledby="step1Title">
+          <div class="step-head">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h2 id="step1Title" class="step-title">Informasi Kontak</h2>
+          </div>
+
+          <div class="field">
+            <label for="phone">Nomor WhatsApp Aktif</label>
+            <div class="input-affix">
+              <span class="affix" aria-hidden="true">+62</span>
+              <input id="phone" name="phone" class="input affix-input" type="tel"
+                     inputmode="numeric" autocomplete="tel"
+                     placeholder="81234567xxx" aria-describedby="phoneHint phoneErr" required>
+            </div>
+            <small id="phoneHint" class="hint">Nomor ini dipakai untuk menghubungi Anda dan memantau progres desain.</small>
+            <p id="phoneErr" class="error-text" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="fullName">Nama Lengkap Anda</label>
+            <input id="fullName" name="fullName" class="input" type="text"
+                   autocomplete="name" placeholder="Masukkan nama panggilan atau nama terang"
+                   aria-describedby="fullNameErr" required>
+            <p id="fullNameErr" class="error-text" hidden></p>
+          </div>
+        </section>
+
+        <!-- STEP 2 — brief spec -->
+        <section class="glass step-card" aria-labelledby="step2Title">
+          <div class="step-head">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h2 id="step2Title" class="step-title">Spesifikasi &amp; Brief</h2>
+          </div>
+
+          <div class="field">
+            <label for="brandName">Nama Brand / Bisnis</label>
+            <input id="brandName" name="brandName" class="input" type="text"
+                   placeholder="Contoh: Kopi Kenangan Senja, Siberia Tech"
+                   aria-describedby="brandNameErr" required>
+            <p id="brandNameErr" class="error-text" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="tagline">Slogan / Tagline Bisnis <span class="opt">(Opsional)</span></label>
+            <input id="tagline" name="tagline" class="input" type="text"
+                   placeholder="Contoh: Rasakan Kehangatan di Setiap Tegukan">
+          </div>
+
+          <div class="field">
+            <label for="brandDescription">Deskripsi Bisnis &amp; Target Pasar</label>
+            <textarea id="brandDescription" name="brandDescription" class="textarea" rows="4"
+                      placeholder="Jelaskan bisnis Anda bergerak di bidang apa dan siapa target konsumen utamanya (anak muda, korporat, wanita, dll)."
+                      aria-describedby="brandDescriptionErr" required></textarea>
+            <p id="brandDescriptionErr" class="error-text" hidden></p>
+          </div>
+
+          <div class="color-grid">
+            <div class="field">
+              <label for="primaryHex">Warna Dominan</label>
+              <div class="color-row">
+                <input id="primaryColor" name="primaryColor" type="color" class="color-swatch"
+                       value="#7c3aed" aria-label="Pemilih warna dominan">
+                <input id="primaryHex" class="input color-hex" type="text" value="#7c3aed"
+                       maxlength="7" spellcheck="false" autocomplete="off"
+                       aria-label="Kode hex warna dominan" aria-describedby="primaryErr">
+              </div>
+              <p id="primaryErr" class="error-text" hidden></p>
+            </div>
+            <div class="field">
+              <label for="secondaryHex">Warna Sekunder <span class="opt">(Opsional)</span></label>
+              <div class="color-row">
+                <input id="secondaryColor" name="secondaryColor" type="color" class="color-swatch"
+                       value="#60a5fa" aria-label="Pemilih warna sekunder">
+                <input id="secondaryHex" class="input color-hex" type="text" value="#60a5fa"
+                       maxlength="7" spellcheck="false" autocomplete="off"
+                       aria-label="Kode hex warna sekunder" aria-describedby="secondaryErr">
+              </div>
+              <p id="secondaryErr" class="error-text" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Catatan Gaya / Permintaan Khusus <span class="opt">(Opsional)</span></label>
+            <textarea id="notes" name="notes" class="textarea" rows="3"
+                      placeholder="Contoh: Saya ingin logonya minimalis menggunakan ikon daun, hindari font yang terlalu kaku."></textarea>
+          </div>
+
+          <!-- honeypot: visually hidden, off-screen, not announced, not tabbable -->
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="company_website">Company Website (jangan diisi)</label>
+            <input id="company_website" name="company_website" type="text"
+                   tabindex="-1" autocomplete="off">
+          </div>
+        </section>
+
+        <!-- status / general error -->
+        <div id="formStatus" class="form-status" role="status" aria-live="polite" hidden></div>
+
+        <button id="submitBtn" type="submit" class="btn btn-primary btn-lg submit-btn">
+          Kirim Data &amp; Lanjut ke WhatsApp ➔
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script type="module" src="assets/js/brief.js"></script>
+</body>
+</html>
