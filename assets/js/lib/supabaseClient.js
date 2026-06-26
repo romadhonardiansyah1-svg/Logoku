@@ -20,7 +20,10 @@ export const supabase =
 /** Build a public URL for an object in the catalog-images bucket. */
 export function catalogImageUrl(imagePath) {
   if (!imagePath) return null;
-  if (/^https?:\/\//.test(imagePath)) return imagePath;
+  // Already a full URL, a site-relative path, or a repo asset path: use as-is.
+  if (/^https?:\/\//.test(imagePath) || imagePath.startsWith('/') || imagePath.startsWith('assets/')) {
+    return imagePath;
+  }
   if (!supabase) return null;
   const { data } = supabase.storage.from('catalog-images').getPublicUrl(imagePath);
   return data?.publicUrl || null;

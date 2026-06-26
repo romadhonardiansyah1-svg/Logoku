@@ -13,15 +13,15 @@ const FALLBACK_CATEGORIES = [
   { slug: 'minimalis-modern', category_name: 'Minimalis & Modern' },
 ];
 const FALLBACK_ITEMS = [
-  { id: 1, slug: 'kuliner-kafe', category: 'Kuliner & Kafe', name: 'Kopi Kenangan Senja', desc: 'Tipografi hangat dengan monogram retro estetik untuk kedai kopi kekinian.', letter: 'KS', markBg: 'linear-gradient(135deg,#f59e0b,#b45309)', markText: '#fff7ed', bg: 'linear-gradient(135deg,#3a2a1a,#1a130b)', radius: '50%' },
-  { id: 2, slug: 'kuliner-kafe', category: 'Kuliner & Kafe', name: 'Roti Bahagia', desc: 'Bentuk membulat lembut yang ramah, ideal untuk bakery dan toko roti.', letter: 'RB', markBg: 'linear-gradient(135deg,#fb7185,#e11d48)', markText: '#fff', bg: 'linear-gradient(135deg,#3a1a24,#1a0b10)', radius: '30px' },
-  { id: 3, slug: 'kuliner-kafe', category: 'Kuliner & Kafe', name: 'Teh Tarik Tariko', desc: 'Aksen daun segar dengan kesan tradisional yang dimodernkan.', letter: 'T', markBg: 'linear-gradient(135deg,#34d399,#059669)', markText: '#04241a', bg: 'linear-gradient(135deg,#10322a,#081914)', radius: '50% 50% 50% 12px' },
-  { id: 4, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Apex Holding Corp', desc: 'Geometris kokoh melambangkan pertumbuhan bisnis yang stabil dan tepercaya.', letter: 'A', markBg: 'linear-gradient(135deg,#60a5fa,#2563eb)', markText: '#04132e', bg: 'linear-gradient(135deg,#13213f,#0a1020)', radius: '20px' },
-  { id: 5, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Nusantara Tech', desc: 'Heksagon presisi yang mewakili teknologi dan jaringan terhubung.', letter: 'N', markBg: 'linear-gradient(135deg,#22d3ee,#0891b2)', markText: '#042b33', bg: 'linear-gradient(135deg,#0e2c33,#07161a)', radius: '24px' },
-  { id: 6, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Vertex Finance', desc: 'Bentuk wajik tegas yang menyiratkan keamanan dan presisi finansial.', letter: 'V', markBg: 'linear-gradient(135deg,#818cf8,#4338ca)', markText: '#0a0a2e', bg: 'linear-gradient(135deg,#1c1c45,#0c0c22)', radius: '18px' },
-  { id: 7, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Purely Organics', desc: 'Garis organik feminin mewah, ideal untuk kosmetik dan kecantikan.', letter: 'P', markBg: 'linear-gradient(135deg,#a3e635,#16a34a)', markText: '#0a2410', bg: 'linear-gradient(135deg,#16301a,#0a190d)', radius: '50%' },
-  { id: 8, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Aurora Studio', desc: 'Gradien lembut serba modern untuk studio kreatif dan agensi.', letter: 'A', markBg: 'linear-gradient(135deg,#c084fc,#7c3aed)', markText: '#fff', bg: 'linear-gradient(135deg,#241338,#120a1d)', radius: '50%' },
-  { id: 9, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Mono Architects', desc: 'Monokrom tegas dan rapi untuk firma arsitektur dan desain interior.', letter: 'M', markBg: 'linear-gradient(135deg,#e5e7eb,#9ca3af)', markText: '#1f2937', bg: 'linear-gradient(135deg,#222433,#101119)', radius: '14px' },
+  { id: 1, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Creative Agency', desc: 'Monogram dinamis hitam-putih yang elegan, pas untuk agensi kreatif & studio.', image_url: 'assets/img/catalog/creative-agency.png' },
+  { id: 2, slug: 'kuliner-kafe', category: 'Kuliner & Kafe', name: 'Mo Drink', desc: 'Ikon gelas minuman modern, cocok untuk kedai minuman dan coffee shop kekinian.', image_url: 'assets/img/catalog/mo-drink.png' },
+  { id: 3, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Fauget Fishing Club', desc: 'Maskot ikan dinamis yang energik untuk komunitas, klub, atau brand outdoor.', image_url: 'assets/img/catalog/fauget-fishing.png' },
+  { id: 4, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Bailey Dupont Perumahan', desc: 'Kombinasi atap dan daun yang asri, ideal untuk properti dan perumahan hijau.', image_url: 'assets/img/catalog/bailey-dupont.png' },
+  { id: 5, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Global Design Studio', desc: 'Wordmark tebal dengan ikon globe, tegas untuk studio kreatif dan korporasi.', image_url: 'assets/img/catalog/global-studio.png' },
+  { id: 6, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Venture', desc: 'Lettermark biru yang bersih dan modern, cocok untuk startup dan brand teknologi.', image_url: 'assets/img/catalog/venture.png' },
+  { id: 7, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Bengkel Cak Mat', desc: 'Gir mesin tegas merah-biru untuk bengkel dan jasa otomotif.', image_url: 'assets/img/catalog/bengkel-cak-mat.png' },
+  { id: 8, slug: 'corporate-bisnis', category: 'Corporate & Bisnis', name: 'Atma', desc: 'Ikon gedung minimalis navy-oranye untuk perusahaan dan konstruksi.', image_url: 'assets/img/catalog/atma.png' },
+  { id: 9, slug: 'minimalis-modern', category: 'Minimalis & Modern', name: 'Creative Technology', desc: 'Garis spirograf artistik untuk brand teknologi dan inovasi.', image_url: 'assets/img/catalog/creative-technology.png' },
 ];
 
 let categories = [];
@@ -44,13 +44,15 @@ function makeCard(item) {
   if (item.bg) thumb.style.background = item.bg;
 
   if (item.image_url) {
+    thumb.style.height = 'auto';
     const img = document.createElement('img');
     img.src = item.image_url;
-    img.alt = item.name;
+    img.alt = `Logo ${item.name}`;
     img.loading = 'lazy';
     img.style.width = '100%';
-    img.style.height = '100%';
+    img.style.aspectRatio = '1 / 1';
     img.style.objectFit = 'cover';
+    img.style.display = 'block';
     thumb.appendChild(img);
   } else {
     const mark = document.createElement('div');
