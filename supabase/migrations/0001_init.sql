@@ -212,6 +212,37 @@ end; $$;
 
 grant execute on function submit_brief(text,text,text,text,int,bigint,text,text,text,text) to anon, authenticated;
 
+-- ---------- public RPC: track_order (customer order tracking) ----------
+-- Returns a SINGLE order's public-safe status, but ONLY when both the order
+-- number AND the matching WhatsApp number are supplied. Anon has no SELECT on
+-- orders/customers, so this is the only public read path and it cannot be used
+-- to enumerate others' orders (need to know order_number + phone together).
+create or replace function track_order(p_order_number text, p_phone text)
+returns table (
+  order_number    text,
+  brand_name      text,
+  progress_status progress_status,
+  payment_status  payment_status,
+  total_amount    int,
+  dp_amount       int,
+  created_at      timestamptz,
+  updated_at      timestamptz
+)
+language sql security definer
+set search_path = public
+stable
+as $$
+  select o.order_number, o.brand_name, o.progress_status, o.payment_status,
+         o.total_amount, o.dp_amount, o.created_at, o.updated_at
+  from public.orders o
+  join public.customers c on c.id = o.customer_id
+  where o.order_number = upper(btrim(p_order_number))
+    and c.whatsapp_number = p_phone
+  limit 1;
+$$;
+
+grant execute on function track_order(text, text) to anon, authenticated;
+
 -- ============================================================
 -- STORAGE BUCKETS + POLICIES
 -- ============================================================

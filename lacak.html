@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lacak Pesanan — LogoKu</title>
+  <meta name="description" content="Lacak status pesanan desain logo Anda di LogoKu dengan nomor pesanan dan nomor WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script src="assets/js/env.js"></script>
+</head>
+<body>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="layer">
+    <header class="site-header">
+      <div class="container header-wrap">
+        <a class="brand" href="index.html">
+          <span class="mark">LK</span>
+          <span class="name">Logo<span>Ku</span></span>
+        </a>
+        <nav class="nav">
+          <a href="index.html#katalog">Katalog</a>
+          <a href="index.html#harga">Paket Harga</a>
+          <a href="brief.html" class="btn btn-primary">Pesan Logo</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container track-wrap">
+      <div class="section-head">
+        <span class="badge">📦 Pantau Progres Desain</span>
+        <h1>Lacak Pesanan Anda</h1>
+        <p>Masukkan nomor pesanan dan nomor WhatsApp yang Anda gunakan saat memesan
+           untuk melihat status terkini.</p>
+      </div>
+
+      <form id="trackForm" class="glass track-form" novalidate>
+        <div class="field">
+          <label for="orderNumber">Nomor Pesanan</label>
+          <input id="orderNumber" name="orderNumber" class="input" type="text"
+                 placeholder="Contoh: LKU-2026-0001" autocomplete="off"
+                 aria-describedby="orderHint orderErr" required>
+          <small id="orderHint" class="hint">Nomor pesanan ada di pesan WhatsApp yang Anda kirim saat memesan.</small>
+          <p id="orderErr" class="error-text" hidden></p>
+        </div>
+        <div class="field">
+          <label for="phone">Nomor WhatsApp</label>
+          <div class="input-affix">
+            <span class="affix" aria-hidden="true">+62</span>
+            <input id="phone" name="phone" class="input affix-input" type="tel"
+                   inputmode="numeric" autocomplete="tel" placeholder="81234567xxx"
+                   aria-describedby="phoneErr" required>
+          </div>
+          <p id="phoneErr" class="error-text" hidden></p>
+        </div>
+        <button id="trackBtn" type="submit" class="btn btn-primary btn-lg" style="width:100%;">Lacak Pesanan</button>
+      </form>
+
+      <div id="trackStatus" class="form-status" role="status" aria-live="polite" hidden></div>
+
+      <!-- result -->
+      <section id="trackResult" class="glass track-result" hidden aria-live="polite">
+        <div class="track-head">
+          <div>
+            <div class="track-eyebrow">Pesanan</div>
+            <div class="track-order-no" id="resOrderNo"></div>
+            <div class="track-brand" id="resBrand"></div>
+          </div>
+          <span class="pill" id="resPayPill"></span>
+        </div>
+
+        <ol class="track-timeline" id="resTimeline"></ol>
+
+        <div class="track-meta">
+          <div><span class="track-meta-label">Total</span><span id="resTotal"></span></div>
+          <div><span class="track-meta-label">DP</span><span id="resDp"></span></div>
+          <div><span class="track-meta-label">Dipesan</span><span id="resCreated"></span></div>
+          <div><span class="track-meta-label">Update terakhir</span><span id="resUpdated"></span></div>
+        </div>
+
+        <a id="resWa" class="btn btn-ghost btn-lg" style="width:100%;text-align:center;margin-top:8px;" target="_blank" rel="noopener">💬 Hubungi Admin via WhatsApp</a>
+      </section>
+    </main>
+
+    <footer class="container site-footer">
+      <a class="brand" href="index.html">
+        <span class="mark">LK</span>
+        <span class="name">Logo<span>Ku</span></span>
+      </a>
+      <p>© 2026 LogoKu. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="assets/js/track.js"></script>
+</body>
+</html>
